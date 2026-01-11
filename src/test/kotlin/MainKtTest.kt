@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test
   val answer = "under"
   val expected = listOf(Color.GREEN.colorBox,Color.GREEN.colorBox,Color.GREEN.colorBox,Color.GREEN.colorBox,Color.GREEN.colorBox)
 
-  val result = gameLogic(input, answer)
+  val result = gameLogic(input, answer).emojiArray
 
   Assertions.assertThat(result).isEqualTo(expected)
  }
@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test
    val answer = "under"
    val expected = listOf(Color.GREEN.colorBox, Color.GREY.colorBox, Color.GREY.colorBox, Color.GREY.colorBox, Color.YELLOW.colorBox)
 
-   val result = gameLogic(input, answer)
+   val result = gameLogic(input, answer).emojiArray
 
    Assertions.assertThat(result).isEqualTo(expected)
   }
@@ -34,7 +34,7 @@ import org.junit.jupiter.api.Test
    val answer = "under"
    val expected = listOf(Color.GREEN.colorBox, Color.GREY.colorBox, Color.GREY.colorBox, Color.GREY.colorBox, Color.GREY.colorBox)
 
-   val result = gameLogic(input, answer)
+   val result = gameLogic(input, answer).emojiArray
 
    Assertions.assertThat(result).isEqualTo(expected)
   }
@@ -45,8 +45,7 @@ import org.junit.jupiter.api.Test
    val answer = "undeu"
    val expected = listOf(Color.GREEN.colorBox, Color.YELLOW.colorBox, Color.GREY.colorBox, Color.GREY.colorBox, Color.GREY.colorBox)
 
-   val result = gameLogic(input, answer)
-
+   val result = gameLogic(input, answer).emojiArray
    Assertions.assertThat(result).isEqualTo(expected)
   }
 
@@ -56,8 +55,7 @@ import org.junit.jupiter.api.Test
    val answer = "unueu"
    val expected = listOf(Color.GREY.colorBox, Color.YELLOW.colorBox, Color.GREY.colorBox, Color.YELLOW.colorBox, Color.GREY.colorBox)
 
-   val result = gameLogic(input, answer)
-
+   val result = gameLogic(input, answer).emojiArray
    Assertions.assertThat(result).isEqualTo(expected)
   }
 
@@ -67,8 +65,7 @@ import org.junit.jupiter.api.Test
    val answer = "ououo"
    val expected = listOf(Color.YELLOW.colorBox, Color.GREY.colorBox, Color.YELLOW.colorBox, Color.GREY.colorBox, Color.GREY.colorBox)
 
-   val result = gameLogic(input, answer)
-
+   val result = gameLogic(input, answer).emojiArray
    Assertions.assertThat(result).isEqualTo(expected)
   }
 }

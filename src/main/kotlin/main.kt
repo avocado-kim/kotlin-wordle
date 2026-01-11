@@ -12,9 +12,12 @@ fun main(args: Array<String>) {
     val index = (daySinceStart % words.size).toInt()
     val answer = words[index]
 
+    val resultView = ResultView()
+
     println(answer)
     val maxCount = 6
     var currentCount = 0
+
     while (currentCount < maxCount) {
         val inputWord = readLine()!!.trim()
         if (inputWord.length != 5) {
@@ -22,29 +25,28 @@ fun main(args: Array<String>) {
             continue
         }
 
-        gameLogic(inputWord, answer)
+        val gameResult = gameLogic(inputWord, answer)
 
-
-        if (inputWord == answer) {
-            println("good 시도횟수: ${currentCount}")
-        } else {
-            currentCount++
-            println("bad 시도횟수: ${currentCount}")
+        resultView.printResult(gameResult)
+        if (gameResult.isSuccess) {
+            break
         }
     }
 
 
 }
 
-fun gameLogic(inputWord: String, answer: String): List<String> {
+fun gameLogic(inputWord: String, answer: String): GameResult {
     val inputWordChars = inputWord.toMutableList()
     val answerChars = answer.toMutableList()
     val emojiArray = MutableList(inputWordChars.size) { Color.GREY.colorBox }
     val usedChars = MutableList(inputWordChars.size) { false }
+    var greenCount = 0
     for (i in inputWordChars.indices) {
         if (inputWordChars[i] == answerChars[i]) {
             emojiArray[i] = Color.GREEN.colorBox
             usedChars[i] = true
+            greenCount++
         } else {
             emojiArray[i] = Color.GREY.colorBox
         }
@@ -64,6 +66,5 @@ fun gameLogic(inputWord: String, answer: String): List<String> {
         }
     }
 
-    println(emojiArray)
-    return emojiArray
+    return GameResult(emojiArray, greenCount == 5)
 }
