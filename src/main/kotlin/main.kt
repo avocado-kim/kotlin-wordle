@@ -15,17 +15,12 @@ fun main(args: Array<String>) {
     val resultView = ResultView()
 
     println(answer)
-    val maxCount = 6
     var currentCount = 0
 
-    while (currentCount < maxCount) {
-        val inputWord = readLine()!!.trim()
-        if (inputWord.length != 5) {
-            println("5글자를 입력해주세요")
-            continue
-        }
+    while (currentCount < Constant.MAX_GAME_TRY_COUNT) {
+        val input = getInput()
 
-        val gameResult = gameLogic(inputWord, answer)
+        val gameResult = gameLogic(input, GameString(answer))
 
         resultView.printResult(gameResult)
         if (gameResult.isSuccess) {
@@ -36,9 +31,9 @@ fun main(args: Array<String>) {
 
 }
 
-fun gameLogic(inputWord: String, answer: String): GameResult {
-    val inputWordChars = inputWord.toMutableList()
-    val answerChars = answer.toMutableList()
+fun gameLogic(inputWord: GameString, answer: GameString): GameResult {
+    val inputWordChars = inputWord.value.toMutableList()
+    val answerChars = answer.value.toMutableList()
     val emojiArray = MutableList(inputWordChars.size) { Color.GREY.colorBox }
     val usedChars = MutableList(inputWordChars.size) { false }
     var greenCount = 0
@@ -67,4 +62,16 @@ fun gameLogic(inputWord: String, answer: String): GameResult {
     }
 
     return GameResult(emojiArray, greenCount == 5)
+}
+
+fun getInput(): GameString {
+    while(true) {
+        val inputWord = readLine()!!.trim()
+        try {
+            return GameString(inputWord)
+        } catch (exception: Exception) {
+            println(exception.message)
+            continue
+        }
+    }
 }
