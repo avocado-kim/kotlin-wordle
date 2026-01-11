@@ -22,6 +22,7 @@ fun main(args: Array<String>) {
         }
         if (line == answer) {
             println("good 시도횟수: ${currentCount}")
+            println(Color.GREEN.colorBox.repeat(5))
         } else {
             currentCount++
             println("bad 시도횟수: ${currentCount}")
