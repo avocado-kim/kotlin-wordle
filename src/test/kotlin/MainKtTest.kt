@@ -49,4 +49,26 @@ import org.junit.jupiter.api.Test
 
    Assertions.assertThat(result).isEqualTo(expected)
   }
+
+  @Test
+  fun `반복문 break 오류케이스 추가`() {
+   val input = "ououo"
+   val answer = "unueu"
+   val expected = listOf(Color.GREY.colorBox, Color.YELLOW.colorBox, Color.GREY.colorBox, Color.YELLOW.colorBox, Color.GREY.colorBox)
+
+   val result = gameLogic(input, answer)
+
+   Assertions.assertThat(result).isEqualTo(expected)
+  }
+
+  @Test
+  fun `반복문 break 오류케이스 추가2`() {
+   val input = "unueu"
+   val answer = "ououo"
+   val expected = listOf(Color.YELLOW.colorBox, Color.GREY.colorBox, Color.YELLOW.colorBox, Color.GREY.colorBox, Color.GREY.colorBox)
+
+   val result = gameLogic(input, answer)
+
+   Assertions.assertThat(result).isEqualTo(expected)
+  }
 }
