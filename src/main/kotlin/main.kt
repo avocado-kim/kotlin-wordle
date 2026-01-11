@@ -22,25 +22,8 @@ fun main(args: Array<String>) {
             continue
         }
 
-        val inputWordChars = inputWord.toMutableList()
-        val answerChars = answer.toMutableList()
-        val emojiArray = MutableList(inputWordChars.size) { Color.GREY.colorBox }
-        for (i in inputWordChars.indices) {
-            if (inputWordChars[i] == answerChars[i]) {
-                emojiArray[i] = Color.GREEN.colorBox
-            } else {
-                emojiArray[i] = Color.GREY.colorBox
-            }
-        }
+        gameLogic(inputWord, answer)
 
-        for (i in emojiArray.indices) {
-            if (emojiArray[i] == Color.GREY.colorBox
-                && answer.contains(inputWordChars[i])) {
-                emojiArray[i] = Color.YELLOW.colorBox
-            }
-        }
-
-        println(emojiArray)
 
         if (inputWord == answer) {
             println("good 시도횟수: ${currentCount}")
@@ -51,4 +34,36 @@ fun main(args: Array<String>) {
     }
 
 
+}
+
+fun gameLogic(inputWord: String, answer: String): List<String> {
+    val inputWordChars = inputWord.toMutableList()
+    val answerChars = answer.toMutableList()
+    val emojiArray = MutableList(inputWordChars.size) { Color.GREY.colorBox }
+    val usedChars = MutableList(inputWordChars.size) { false }
+    for (i in inputWordChars.indices) {
+        if (inputWordChars[i] == answerChars[i]) {
+            emojiArray[i] = Color.GREEN.colorBox
+            usedChars[i] = true
+        } else {
+            emojiArray[i] = Color.GREY.colorBox
+        }
+    }
+
+    for (i in inputWordChars.indices) {
+        if (emojiArray[i] == Color.GREEN.colorBox) {
+            continue
+        }
+        for (j in answerChars.indices) {
+            if (usedChars[j]) continue
+            if (inputWordChars[i] == answerChars[j]) {
+                emojiArray[i] = Color.YELLOW.colorBox
+                usedChars[j] = true
+                break
+            }
+        }
+    }
+
+    println(emojiArray)
+    return emojiArray
 }
