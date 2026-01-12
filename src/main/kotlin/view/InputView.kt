@@ -1,3 +1,7 @@
+package view
+
+import domain.GameString
+
 class InputView {
 
     fun getInput(): GameString {

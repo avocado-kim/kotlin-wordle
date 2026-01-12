@@ -1,6 +1,7 @@
+import domain.Color
+import domain.GameString
+import domain.WordleGame
 import org.assertj.core.api.Assertions
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.DisplayName
 
 import org.junit.jupiter.api.Test
 

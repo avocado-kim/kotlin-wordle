@@ -1,3 +1,5 @@
+package domain
+
 data class GameString(val value: String) {
     init {
         require(value.length == Constant.LENGTH) {

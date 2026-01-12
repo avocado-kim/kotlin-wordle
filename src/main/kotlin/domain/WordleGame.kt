@@ -1,3 +1,7 @@
+package domain
+
+import domain.vo.GameResult
+
 class WordleGame() {
     fun logic(inputWord: GameString, answer: GameString): GameResult {
         val inputWordChars = inputWord.value.toMutableList()

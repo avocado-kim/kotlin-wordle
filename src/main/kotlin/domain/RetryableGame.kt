@@ -1,3 +1,8 @@
+package domain
+
+import view.InputView
+import view.ResultView
+
 class RetryableGame(val wordleGame: WordleGame, val resultView: ResultView, val input: InputView) {
     fun run(answer: GameString) {
         var currentCount = 0

@@ -1,3 +1,5 @@
+package domain
+
 class Constant {
     companion object {
         val LENGTH = 5

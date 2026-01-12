@@ -1,3 +1,7 @@
+package view
+
+import domain.vo.GameResult
+
 class ResultView {
 
     fun printResult(gameResult: GameResult) {
