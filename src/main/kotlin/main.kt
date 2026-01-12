@@ -1,8 +1,9 @@
 fun main(args: Array<String>) {
-    val start = Start()
     val resultView = ResultView()
+    val inputView = InputView()
     val wordleGame = WordleGame()
-    val game = Game(wordleGame, resultView, InputView())
+    val game = RetryableGame(wordleGame, resultView, inputView)
+    val start = Start()
     val answer = start.findAnswer()
     game.run(answer);
 }

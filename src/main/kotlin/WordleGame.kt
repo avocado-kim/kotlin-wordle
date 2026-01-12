@@ -4,6 +4,20 @@ class WordleGame() {
         val answerChars = answer.value.toMutableList()
         val emojiArray = MutableList(inputWordChars.size) { Color.GREY.colorBox }
         val usedChars = MutableList(inputWordChars.size) { false }
+
+        val greenCount = checkGreen(inputWordChars, answerChars, emojiArray, usedChars)
+
+        checkYellow(inputWordChars, emojiArray, answerChars, usedChars)
+
+        return GameResult(emojiArray, greenCount == 5)
+    }
+
+    private fun checkGreen(
+        inputWordChars: MutableList<Char>,
+        answerChars: MutableList<Char>,
+        emojiArray: MutableList<String>,
+        usedChars: MutableList<Boolean>
+    ): Int {
         var greenCount = 0
         for (i in inputWordChars.indices) {
             if (inputWordChars[i] == answerChars[i]) {
@@ -14,21 +28,28 @@ class WordleGame() {
                 emojiArray[i] = Color.GREY.colorBox
             }
         }
+        return greenCount
+    }
 
+    private fun checkYellow(
+        inputWordChars: MutableList<Char>,
+        emojiArray: MutableList<String>,
+        answerChars: MutableList<Char>,
+        usedChars: MutableList<Boolean>
+    ) {
         for (i in inputWordChars.indices) {
             if (emojiArray[i] == Color.GREEN.colorBox) {
                 continue
             }
-            for (j in answerChars.indices) {
-                if (usedChars[j]) continue
-                if (inputWordChars[i] == answerChars[j]) {
-                    emojiArray[i] = Color.YELLOW.colorBox
-                    usedChars[j] = true
-                    break
-                }
+            val j = answerChars.indices.firstOrNull {
+                !usedChars[it] && answerChars[it] == inputWordChars[i]
+            }
+            if (j != null) {
+                emojiArray[i] = Color.YELLOW.colorBox
+                usedChars[j] = true
             }
         }
-
-        return GameResult(emojiArray, greenCount == 5)
     }
+
+
 }
