@@ -1,20 +1,5 @@
-class GameLogic(val resultView: ResultView, val input: InputView) {
-
-    fun run(answer: GameString) {
-        var currentCount = 0
-        while (currentCount < Constant.MAX_GAME_TRY_COUNT) {
-            val input = input.getInput()
-
-            val gameResult = gameLogic(input, answer)
-
-            resultView.printResult(gameResult)
-            if (gameResult.isSuccess) {
-                break
-            }
-        }
-    }
-
-    fun gameLogic(inputWord: GameString, answer: GameString): GameResult {
+class WordleGame() {
+    fun logic(inputWord: GameString, answer: GameString): GameResult {
         val inputWordChars = inputWord.value.toMutableList()
         val answerChars = answer.value.toMutableList()
         val emojiArray = MutableList(inputWordChars.size) { Color.GREY.colorBox }
