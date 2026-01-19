@@ -1,20 +1,35 @@
 package domain
 
+import domain.vo.GameResult
 import view.InputView
 import view.ResultView
 
-class RetryableGame(val wordleGame: WordleGame, val resultView: ResultView, val input: InputView) {
+class RetryableGame(val wordleGame: WordleGame, val resultView: ResultView, val inputView: InputView) {
     fun run(answer: GameString) {
+        inputView.printIntro()
+        val accumulatedResults = mutableListOf<GameResult>()
         var currentCount = 0
+
         while (currentCount < Constant.MAX_GAME_TRY_COUNT) {
-            val input = input.getInput()
-
+            inputView.printInputPrompt()
+            val input = inputView.getInput()
             val gameResult = wordleGame.logic(input, answer)
+            accumulatedResults.add(gameResult)
+            currentCount++
 
-            resultView.printResult(gameResult)
             if (gameResult.isSuccess) {
-                break
+                printSuccessResult(currentCount, accumulatedResults)
+                return
             }
+            resultView.printAccumulatedResults(accumulatedResults)
         }
+    }
+
+    fun printSuccessResult(
+        attemptCount: Int,
+        results: List<GameResult>,
+    ) {
+        resultView.printFinalScore(attemptCount)
+        resultView.printAccumulatedResults(results)
     }
 }
