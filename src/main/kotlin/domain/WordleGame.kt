@@ -1,5 +1,6 @@
 package domain
 
+import domain.Constant.SUCCESS_COUNT
 import domain.vo.GameResult
 
 class WordleGame() {
@@ -12,14 +13,14 @@ class WordleGame() {
         val emojiArray = MutableList(inputWordChars.size) { Color.GREY.colorBox }
         val usedChars = MutableList(inputWordChars.size) { false }
 
-        val greenCount = checkGreen(inputWordChars, answerChars, emojiArray, usedChars)
+        val greenCount = markGreen(inputWordChars, answerChars, emojiArray, usedChars)
 
-        checkYellow(inputWordChars, emojiArray, answerChars, usedChars)
+        markYellow(inputWordChars, answerChars, emojiArray, usedChars)
 
-        return GameResult(emojiArray, greenCount == 5)
+        return GameResult(emojiArray, greenCount == SUCCESS_COUNT)
     }
 
-    private fun checkGreen(
+    private fun markGreen(
         inputWordChars: MutableList<Char>,
         answerChars: MutableList<Char>,
         emojiArray: MutableList<String>,
@@ -38,10 +39,10 @@ class WordleGame() {
         return greenCount
     }
 
-    private fun checkYellow(
+    private fun markYellow(
         inputWordChars: MutableList<Char>,
-        emojiArray: MutableList<String>,
         answerChars: MutableList<Char>,
+        emojiArray: MutableList<String>,
         usedChars: MutableList<Boolean>
     ) {
         for (i in inputWordChars.indices) {

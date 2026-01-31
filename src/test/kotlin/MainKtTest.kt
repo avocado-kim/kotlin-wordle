@@ -63,7 +63,7 @@ class MainKtTest {
     }
 
     @Test
-    fun `오류케이스 추가`() {
+    fun `같은 글자가 중복 입력될 경우 Green, Yellow를 적용하고 나머지 단어는 Grey`() {
         val input = GameString("uuuuo")
         val answer = GameString("undeu")
         val game = WordleGame()
@@ -81,7 +81,7 @@ class MainKtTest {
     }
 
     @Test
-    fun `반복문 break 오류케이스 추가`() {
+    fun `중복된 글자가 입력되고 위치만 다를 경우 Yellow로 표현한다 1`() {
         val input = GameString("ououo")
         val answer = GameString("unueu")
         val game = WordleGame()
@@ -99,7 +99,7 @@ class MainKtTest {
     }
 
     @Test
-    fun `반복문 break 오류케이스 추가2`() {
+    fun `중복된 글자가 입력되고 위치만 다를 경우 Yellow로 표현한다 2`() {
         val input = GameString("unueu")
         val answer = GameString("ououo")
         val game = WordleGame()
@@ -117,7 +117,7 @@ class MainKtTest {
     }
 
     @Test
-    fun `모두 노란색`() {
+    fun `글자는 모두 포함되지만 위치가 맞지 않다면 모두 Yellow`() {
         val input = GameString("abcde")
         val answer = GameString("badec")
         val game = WordleGame()
